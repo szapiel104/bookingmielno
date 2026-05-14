@@ -20,16 +20,17 @@ class BookingController extends Controller
     }
 
     /**
-     * Get available dates (dates without confirmed bookings)
+     * Get available dates (dates without confirmed and pending bookings)
      */
     public function getAvailability()
     {
-        $bookings = Booking::where('status', 'Confirmed')->get(['check_in_date', 'check_out_date']);
+        $bookings = Booking::whereIn('status', ['Confirmed', 'Pending'])->get(['check_in_date', 'check_out_date']);
         
         $booked_dates = [];
         foreach ($bookings as $booking) {
             $current_date = $booking->check_in_date->copy();
-            while ($current_date < $booking->check_out_date) {
+            // Dodaj wszystkie daty od check_in do check_out włącznie
+            while ($current_date <= $booking->check_out_date) {
                 $booked_dates[] = $current_date->format('Y-m-d');
                 $current_date->addDay();
             }

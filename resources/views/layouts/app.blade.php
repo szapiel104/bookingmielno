@@ -69,6 +69,66 @@
             background: #ececef;
         }
 
+        .navbar-collapse-desktop {
+            display: none;
+        }
+
+        @media (min-width: 992px) {
+            .navbar-toggler {
+                display: none !important;
+            }
+
+            .navbar-collapse-desktop {
+                display: flex !important;
+                align-items: center;
+                flex: 1;
+            }
+
+            .offcanvas {
+                display: none !important;
+            }
+        }
+
+        .offcanvas {
+            width: 80% !important;
+            max-width: 360px;
+            background: #f7f7f8;
+        }
+
+        .offcanvas-header {
+            background: #f7f7f8;
+            border-bottom: 1px solid #e2e2e2;
+            padding: 20px;
+        }
+
+        .offcanvas-body {
+            padding: 20px 0;
+        }
+
+        .offcanvas-body .nav-link {
+            padding: 15px 20px !important;
+            color: #151821 !important;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border-left: 4px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .offcanvas-body .nav-link:hover {
+            background: #ececef;
+            border-left-color: #7C83FD;
+        }
+
+        .offcanvas-body .nav-cta {
+            margin: 10px 20px;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-close {
+            filter: invert(0.2) sepia(0.6);
+        }
+
         .nav-cta {
             border: 1.5px solid #151821;
             color: #151821;
@@ -118,26 +178,6 @@
 
         .eu-badge::before {
             content: 'UE';
-        }
-
-        @media (max-width: 991.98px) {
-            .navbar {
-                min-height: auto;
-            }
-
-            .navbar-brand {
-                font-size: 1.5rem;
-            }
-
-            .main-nav {
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
-
-            .nav-actions {
-                gap: 10px;
-                padding-bottom: 10px;
-            }
         }
 
         .hero-section {
@@ -293,6 +333,62 @@
             font-size: 0.9rem;
             margin: 2px 0;
         }
+
+        @media (max-width: 767.98px) {
+            .hero-section {
+                padding: 50px 0;
+                border-radius: 0 0 1.5rem 1.5rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+            }
+
+            .about-section {
+                padding: 40px 0;
+            }
+
+            .contact-section {
+                padding: 40px 0;
+            }
+
+            .contact-section h2 {
+                margin-bottom: 20px;
+                font-size: 1.5rem;
+            }
+
+            footer {
+                padding: 20px 0;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .booking-form {
+                padding: 20px;
+                margin-top: -40px;
+            }
+
+            .calendar-container {
+                padding: 15px;
+            }
+
+            .fc {
+                font-size: 0.85rem;
+            }
+
+            .fc-daygrid-day-frame {
+                min-height: 60px;
+            }
+        }
     </style>
     @yield('additional_styles')
 </head>
@@ -300,11 +396,12 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid px-lg-4">
             <a class="navbar-brand" href="/">Art Lake 28</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav main-nav mx-auto align-items-lg-center">
+            <!-- Desktop Menu -->
+            <div class="navbar-collapse-desktop">
+                <ul class="navbar-nav main-nav mx-auto align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="/o-nas">O nas</a>
                     </li>
@@ -315,8 +412,31 @@
                         <a class="nav-link" href="/kontakt">Kontakt</a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center nav-actions gap-3 ms-lg-2">
+                <div class="d-flex align-items-center gap-3">
                     <a href="/rezerwacja" class="nav-cta">Rezerwuj</a>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavLabel">Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Zamknij"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav main-nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/o-nas" data-bs-dismiss="offcanvas">O nas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/rezerwacja" data-bs-dismiss="offcanvas">Rezerwacja</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/kontakt" data-bs-dismiss="offcanvas">Kontakt</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex flex-column mt-3">
+                        <a href="/rezerwacja" class="nav-cta" data-bs-dismiss="offcanvas">Rezerwuj</a>
+                    </div>
                 </div>
             </div>
         </div>

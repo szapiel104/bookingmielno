@@ -74,7 +74,60 @@
 
     @media (max-width: 767.98px) {
         .booking-page .hero-panel {
-            padding: 1.35rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 1rem;
+        }
+
+        .booking-page .hero-panel h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .booking-page .hero-panel p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .booking-page .d-flex.flex-wrap.gap-2 {
+            gap: 0.5rem !important;
+        }
+
+        .booking-page .info-chip {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.75rem;
+        }
+
+        .booking-page .panel-card {
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .booking-page .legend-dot {
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
+        }
+
+        .booking-page .row.g-4 {
+            gap: 1rem !important;
+        }
+
+        .booking-page .calendar-container {
+            padding: 10px;
+            margin: 15px 0;
+        }
+
+        .booking-page .fc {
+            font-size: 0.8rem;
+        }
+
+        .booking-page .fc-daygrid-day-frame {
+            min-height: 50px;
+        }
+
+        .booking-page #bookingForm {
+            padding: 1.5rem;
         }
     }
 </style>
@@ -97,7 +150,7 @@
             @include('booking._form')
         </div>
         <div class="col-12 col-lg-7">
-            <div class="panel-card mb-3">
+            <div class="mb-3">
                 <div class="calendar-container mb-0" id="calendar"></div>
             </div>
             <div class="panel-card text-center">
@@ -111,14 +164,81 @@
 
 @section('additional_scripts')
 <script>
+    let currentCalendar = null;
+    let checkinPicker = null;
+    let checkoutPicker = null;
+
+    function refreshCalendarAndDatePickers() {
+        fetch('/api/availability')
+            .then(response => response.json())
+            .then(data => {
+                const bookedDates = data.booked_dates;
+                const calendarEl = document.getElementById('calendar');
+
+                // Zniszcz stary kalendarz jeśli istnieje
+                if (currentCalendar) {
+                    currentCalendar.destroy();
+                }
+
+                // Stwórz nowy kalendarz z zaktualizowanymi datami
+                currentCalendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    locale: 'pl',
+                    height: 400,
+                    events: bookedDates.map(date => ({
+                        start: date,
+                        end: new Date(new Date(date).getTime() + 86400000).toISOString().split('T')[0],
+                        display: 'background',
+                        backgroundColor: '#FF6A6A'
+                    }))
+                });
+                currentCalendar.render();
+
+                // Uaktualnij datepickery
+                if (checkinPicker) {
+                    checkinPicker.destroy();
+                }
+                if (checkoutPicker) {
+                    checkoutPicker.destroy();
+                }
+
+                checkinPicker = flatpickr('#checkin', {
+                    locale: 'pl',
+                    minDate: 'today',
+                    dateFormat: 'Y-m-d',
+                    disable: bookedDates,
+                    onChange: function(selectedDates, dateStr) {
+                        // Ustaw minDate dla checkout na dzień PO check-in
+                        if (selectedDates.length > 0) {
+                            const nextDay = new Date(selectedDates[0]);
+                            nextDay.setDate(nextDay.getDate() + 1);
+                            checkoutPicker.set('minDate', nextDay);
+                            // Wyczyść pole checkout jeśli zawiera starą datę
+                            if (checkoutPicker.selectedDates.length > 0 && checkoutPicker.selectedDates[0] <= selectedDates[0]) {
+                                checkoutPicker.clear();
+                            }
+                        }
+                    }
+                });
+
+                checkoutPicker = flatpickr('#checkout', {
+                    locale: 'pl',
+                    minDate: 'today',
+                    dateFormat: 'Y-m-d',
+                    disable: bookedDates
+                });
+            });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         // Kalendarz FullCalendar
-        const calendarEl = document.getElementById('calendar');
         const bookingForm = document.getElementById('bookingForm');
         const submitButton = bookingForm ? bookingForm.querySelector('button[type="submit"]') : null;
         const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
         const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
-        let bookedDates = [];
+
+        // Załaduj kalendarz i datepickery przy załadowaniu strony
+        refreshCalendarAndDatePickers();
 
         if (bookingForm) {
             bookingForm.addEventListener('submit', async function(event) {
@@ -174,6 +294,8 @@
                     });
 
                     bookingForm.reset();
+                    // Odśwież kalendarz po pomyślnej rezerwacji
+                    refreshCalendarAndDatePickers();
                 } catch (error) {
                     Swal.fire({
                         icon: 'error',
@@ -188,41 +310,6 @@
                 }
             });
         }
-
-        fetch('/api/availability')
-            .then(response => response.json())
-            .then(data => {
-                bookedDates = data.booked_dates;
-                const calendar = new FullCalendar.Calendar(calendarEl, {
-                    initialView: 'dayGridMonth',
-                    locale: 'pl',
-                    height: 400,
-                    events: bookedDates.map(date => ({
-                        start: date,
-                        end: new Date(new Date(date).getTime() + 86400000).toISOString().split('T')[0],
-                        display: 'background',
-                        backgroundColor: '#FF6A6A'
-                    }))
-                });
-                calendar.render();
-
-                // Flatpickr do wyboru dat
-                flatpickr('#checkin', {
-                    locale: 'pl',
-                    minDate: 'today',
-                    dateFormat: 'Y-m-d',
-                    disable: bookedDates,
-                    onChange: function(selectedDates, dateStr) {
-                        checkoutPicker.set('minDate', dateStr);
-                    }
-                });
-                const checkoutPicker = flatpickr('#checkout', {
-                    locale: 'pl',
-                    minDate: 'today',
-                    dateFormat: 'Y-m-d',
-                    disable: bookedDates
-                });
-            });
     });
 </script>
 @endsection

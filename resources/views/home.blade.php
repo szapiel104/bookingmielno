@@ -85,6 +85,84 @@
         .home-page .section-surface {
             padding: 1.25rem;
         }
+
+        .home-page .hero-img,
+        .home-page .about-img {
+            border-radius: 0.75rem;
+        }
+
+        .home-page {
+            --home-padding: 1rem;
+        }
+
+        .home-page .row {
+            margin-bottom: 2rem !important;
+        }
+
+        .home-page h1 {
+            font-size: 1.75rem !important;
+        }
+
+        .home-page h2 {
+            font-size: 1.5rem !important;
+        }
+
+        .home-page .py-5 {
+            padding-top: 1.5rem !important;
+            padding-bottom: 1.5rem !important;
+        }
+
+        .home-page section.py-5 {
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+        }
+
+        .home-page .feature-card {
+            padding: 1.5rem !important;
+        }
+
+        .home-page .gallery-img {
+            border-radius: 0.6rem;
+        }
+
+        .home-page .g-3 {
+            gap: 0.75rem !important;
+        }
+
+        .home-page .accordion-button {
+            padding: 0.75rem 1rem !important;
+            font-size: 0.95rem;
+        }
+
+        .home-page .accordion-body {
+            padding: 1rem !important;
+        }
+
+        /* Hero section - dodaj więcej marginesu dla przycisku */
+        .home-page .row.align-items-center.mb-5 {
+            margin-bottom: 3rem !important;
+        }
+
+        .home-page .col-md-6:first-child {
+            margin-bottom: 2rem;
+        }
+
+        .home-page .btn-primary.btn-lg {
+            margin-bottom: 2rem;
+        }
+
+        /* Galeria - zwiększ na mobilce */
+        .home-page .col-6.col-md-3 {
+            min-height: auto;
+        }
+
+        .home-page .gallery-img {
+            min-height: 150px;
+        }
+
+        .home-page .row.g-3.justify-content-center {
+            gap: 1rem !important;
+        }
     }
 </style>
 @endsection
