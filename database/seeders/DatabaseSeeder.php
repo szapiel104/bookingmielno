@@ -17,12 +17,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create admin user
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@bookingmielno.pl',
-            'password' => bcrypt('admin123'), // Change this password!
-            'is_admin' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@bookingmielno.pl'],
+            [
+                'name' => 'Administrator',
+                'email' => 'admin@bookingmielno.pl',
+                'password' => bcrypt('BookingMielno@2026!Admin'),
+                'is_admin' => true,
+            ]
+        );
 
         // Create default settings
         $settings = [
