@@ -1,18 +1,19 @@
 @extends('layouts.admin')
 
 @section('title', 'Szczegóły Rezerwacji - Panel Administratora')
+@section('page_title', 'Rezerwacja #' . $booking->id)
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Rezerwacja #{{ $booking->id }}</h1>
-    <a href="{{ route('admin.bookings') }}" class="btn btn-sm btn-outline-secondary">← Powrót</a>
+    <p class="text-muted mb-0">Pełne dane rezerwacji i panel obsługi statusu.</p>
+    <a href="{{ route('admin.bookings') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-arrow-left mr-1"></i>Powrót</a>
 </div>
 
 <div class="row">
     <div class="col-lg-8">
-        <div class="card mb-4">
+        <div class="card admin-panel mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Dane Rezerwacji</h5>
+                <h3 class="card-title"><i class="fas fa-user mr-2"></i>Dane rezerwacji</h3>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -32,9 +33,9 @@
             </div>
         </div>
 
-        <div class="card mb-4">
+        <div class="card admin-panel mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Podsumowanie Ceny</h5>
+                <h3 class="card-title"><i class="fas fa-money-bill-wave mr-2"></i>Podsumowanie ceny</h3>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -48,16 +49,16 @@
                     </div>
                     <div class="col-md-4">
                         <p><strong>Razem:</strong></p>
-                        <p class="h5" style="color: #16a34a;">{{ $booking->total_price }} PLN</p>
+                        <p class="h5 text-success">{{ $booking->total_price }} PLN</p>
                     </div>
                 </div>
             </div>
         </div>
 
         @if($booking->special_requests)
-        <div class="card mb-4">
+        <div class="card admin-panel mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Specjalne Życzenia</h5>
+                <h3 class="card-title"><i class="fas fa-comment-dots mr-2"></i>Specjalne życzenia</h3>
             </div>
             <div class="card-body">
                 {{ $booking->special_requests }}
@@ -65,9 +66,9 @@
         </div>
         @endif
 
-        <div class="card mb-4">
+        <div class="card admin-panel mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Notatki Administratora</h5>
+                <h3 class="card-title"><i class="fas fa-sticky-note mr-2"></i>Notatki administratora</h3>
             </div>
             <div class="card-body">
                 <p style="white-space: pre-wrap;">{{ $booking->admin_notes ?? 'Brak notatek' }}</p>
@@ -75,7 +76,7 @@
         </div>
 
         @if($booking->confirmed_at)
-        <div class="card mb-4">
+        <div class="card admin-panel mb-4">
             <div class="card-body">
                 <p class="text-muted mb-0">Potwierdzona: <strong>{{ $booking->confirmed_at->format('d.m.Y H:i') }}</strong></p>
             </div>
@@ -84,9 +85,9 @@
     </div>
 
     <div class="col-lg-4">
-        <div class="card">
+        <div class="card admin-panel">
             <div class="card-header">
-                <h5 class="mb-0">Zmień Status</h5>
+                <h3 class="card-title"><i class="fas fa-tasks mr-2"></i>Zmień status</h3>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.bookings.update', $booking) }}" method="POST">
@@ -95,7 +96,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Status</label>
-                        <select name="status" class="form-select">
+                        <select name="status" class="form-control">
                             <option value="Pending" @if($booking->status == 'Pending') selected @endif>Oczekująca</option>
                             <option value="Confirmed" @if($booking->status == 'Confirmed') selected @endif>Potwierdzona</option>
                             <option value="Cancelled" @if($booking->status == 'Cancelled') selected @endif>Anulowana</option>
@@ -104,7 +105,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Notatka Administratora</label>
-                        <textarea name="admin_notes" class="form-control" rows="4">{{ $booking->admin_notes }}</textarea>
+                        <textarea name="admin_notes" class="form-control" rows="4" placeholder="Dodaj krótką notatkę dla zespołu">{{ $booking->admin_notes }}</textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Zaktualizuj</button>
@@ -120,12 +121,12 @@
             </div>
         </div>
 
-        <div class="card mt-3">
+        <div class="card admin-panel mt-3">
             <div class="card-header">
-                <h5 class="mb-0">Status</h5>
+                <h3 class="card-title"><i class="fas fa-traffic-light mr-2"></i>Status</h3>
             </div>
             <div class="card-body text-center">
-                <span class="badge" style="background-color: #{{ ['Pending' => 'ea580c', 'Confirmed' => '16a34a', 'Cancelled' => 'dc2626'][$booking->status] ?? 'ccc' }}; padding: 10px; font-size: 1rem;">
+                <span class="badge" style="background-color: #{{ ['Pending' => 'ea580c', 'Confirmed' => '16a34a', 'Cancelled' => 'dc2626'][$booking->status] ?? 'ccc' }}; padding: 10px 14px; font-size: 1rem;">
                     {{ ['Pending' => 'Oczekująca', 'Confirmed' => 'Potwierdzona', 'Cancelled' => 'Anulowana'][$booking->status] ?? 'Nieznana' }}
                 </span>
             </div>

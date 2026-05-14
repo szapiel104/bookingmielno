@@ -1,11 +1,12 @@
 @extends('layouts.admin')
 
 @section('title', 'Ustawienia - Panel Administratora')
+@section('page_title', 'Ustawienia systemu')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Ustawienia Systemu</h1>
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-secondary">← Dashboard</a>
+    <p class="text-muted mb-0">Parametry cen, maili i trybu działania strony.</p>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-arrow-left mr-1"></i>Dashboard</a>
 </div>
 
 <form action="{{ route('admin.settings.update') }}" method="POST">
@@ -13,9 +14,9 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <div class="card mb-4">
+            <div class="card admin-panel mb-4">
                 <div class="card-header">
-                    <h5 class="mb-0">💰 Ustawienia Cen</h5>
+                    <h3 class="card-title"><i class="fas fa-coins mr-2"></i>Ustawienia cen</h3>
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
@@ -32,9 +33,9 @@
                 </div>
             </div>
 
-            <div class="card mb-4">
+            <div class="card admin-panel mb-4">
                 <div class="card-header">
-                    <h5 class="mb-0">📧 Powiadomienia Email</h5>
+                    <h3 class="card-title"><i class="fas fa-envelope mr-2"></i>Powiadomienia email</h3>
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
@@ -48,9 +49,9 @@
         </div>
 
         <div class="col-lg-6">
-            <div class="card mb-4">
+            <div class="card admin-panel mb-4">
                 <div class="card-header">
-                    <h5 class="mb-0">📬 Konfiguracja SMTP</h5>
+                    <h3 class="card-title"><i class="fas fa-server mr-2"></i>Konfiguracja SMTP</h3>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info" role="alert">
@@ -91,9 +92,9 @@
         </div>
     </div>
 
-    <div class="card mb-4">
+    <div class="card admin-panel mb-4">
         <div class="card-header">
-            <h5 class="mb-0">🔧 Dodatkowe Ustawienia</h5>
+            <h3 class="card-title"><i class="fas fa-tools mr-2"></i>Dodatkowe ustawienia</h3>
         </div>
         <div class="card-body">
             <div class="mb-3">
@@ -115,14 +116,14 @@
     </div>
 
     <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-primary">💾 Zapisz Ustawienia</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i>Zapisz ustawienia</button>
         <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Anuluj</a>
     </div>
 </form>
 
-<div class="card mt-4">
+<div class="card admin-panel mt-4">
     <div class="card-header">
-        <h5 class="mb-0">ℹ️ Informacje o Systemie</h5>
+        <h3 class="card-title"><i class="fas fa-info-circle mr-2"></i>Informacje o systemie</h3>
     </div>
     <div class="card-body">
         <p><strong>Wersja Laravel:</strong> {{ app()->version() }}</p>

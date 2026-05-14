@@ -1,23 +1,24 @@
 @extends('layouts.admin')
 
 @section('title', 'Edytor Treści - Panel Administratora')
+@section('page_title', 'Edytor treści')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Edytor Treści</h1>
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-secondary">← Dashboard</a>
+    <p class="text-muted mb-0">Zmiany treści strony głównej i sekcji informacyjnych.</p>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-arrow-left mr-1"></i>Dashboard</a>
 </div>
 
-<div class="card">
+<div class="card admin-panel">
     <div class="card-header">
-        <h5 class="mb-0">✏️ Edytuj Zawartość Strony</h5>
+        <h3 class="card-title"><i class="fas fa-pen mr-2"></i>Edytuj zawartość strony</h3>
     </div>
     <div class="card-body">
         <form action="{{ route('admin.content.update') }}" method="POST">
             @csrf
 
             <div class="mb-4">
-                <h6 class="border-bottom pb-2">Sekcja Hero (Nagłówek)</h6>
+                <h6 class="border-bottom pb-2">Sekcja Hero (nagłówek)</h6>
                 
                 <div class="mb-3">
                     <label class="form-label">Tytuł Główny</label>
@@ -35,7 +36,7 @@
             </div>
 
             <div class="mb-4">
-                <h6 class="border-bottom pb-2">Sekcja O Nas</h6>
+                <h6 class="border-bottom pb-2">Sekcja O nas</h6>
                 
                 <div class="mb-3">
                     <label class="form-label">Tytuł Sekcji</label>
@@ -51,7 +52,7 @@
             </div>
 
             <div class="mb-4">
-                <h6 class="border-bottom pb-2">Sekcja Kontaktu</h6>
+                <h6 class="border-bottom pb-2">Sekcja kontaktu</h6>
                 
                 <div class="mb-3">
                     <label class="form-label">Nagłówek Sekcji Kontaktu</label>
@@ -72,19 +73,19 @@
             </div>
 
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary">💾 Zapisz Zmiany</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i>Zapisz zmiany</button>
                 <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Anuluj</a>
             </div>
         </form>
     </div>
 </div>
 
-<div class="card mt-4">
+<div class="card admin-panel mt-4">
     <div class="card-header">
-        <h5 class="mb-0">👁️ Podgląd Zmian</h5>
+        <h3 class="card-title"><i class="fas fa-eye mr-2"></i>Podgląd zmian</h3>
     </div>
     <div class="card-body">
-        <p class="text-muted">Aby zobaczyć zmiany na stronie, odwiedź <a href="/" target="_blank">stronę główną →</a></p>
+        <p class="text-muted mb-0">Aby zobaczyć zmiany na stronie, odwiedź <a href="/" target="_blank">stronę główną <i class="fas fa-external-link-alt"></i></a></p>
     </div>
 </div>
 
