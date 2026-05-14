@@ -12,12 +12,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Check if site is under construction and user is not logged in
-        $under_construction = Setting::get('under_construction', false);
-        if ($under_construction && !auth()->check()) {
-            return view('under-construction');
-        }
-
         $hero_title = Setting::get('home_hero_title', 'Witamy w BookingMielno');
         $hero_subtitle = Setting::get('home_hero_subtitle', 'Luksusowy apartament w sercu Mielna');
         $about_title = Setting::get('home_about_title', 'O naszym apartamencie');

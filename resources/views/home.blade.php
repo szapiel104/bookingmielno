@@ -4,40 +4,114 @@
 
 @section('additional_styles')
 <style>
-    .flatpickr-day.booked {
-        background: #dc2626;
-        color: white;
+    .home-page {
+        --home-bg: #f3f4f6;
+        --home-surface: #ffffff;
+        --home-primary: #3559e0;
+        --home-text: #1f2937;
+        --home-muted: #6b7280;
+        --home-border: #e5e7eb;
     }
 
-    .flatpickr-day.disabled {
-        background: #fca5a5;
+    .home-page .section-surface {
+        background: var(--home-surface);
+        border: 1px solid var(--home-border);
+        border-radius: 1.2rem;
+        padding: 2rem;
+    }
+
+    .home-page .hero-img,
+    .home-page .about-img {
+        width: 100%;
+        border-radius: 1rem;
+        object-fit: cover;
+        display: block;
+    }
+
+    .home-page .hero-img {
+        aspect-ratio: 4 / 3;
+    }
+
+    .home-page .about-img {
+        aspect-ratio: 16 / 10;
+    }
+
+    .home-page .feature-card {
+        height: 100%;
+        border: 1px solid var(--home-border);
+        border-radius: 0.9rem;
+        background: var(--home-surface);
+    }
+
+    .home-page .gallery-img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 0.9rem;
+        border: 1px solid var(--home-border);
+        display: block;
+    }
+
+    .home-page .review-card {
+        height: 100%;
+        border: 1px solid var(--home-border);
+        border-radius: 0.9rem;
+        background: #f9fafb;
+    }
+
+    .home-page .review-card footer {
+        color: var(--home-muted);
+    }
+
+    .home-page .section-title {
+        color: var(--home-text);
+    }
+
+    .home-page .text-muted-custom {
+        color: var(--home-muted);
+    }
+
+    .home-page .contact-panel {
+        background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+        color: #fff;
+        border-radius: 1rem;
+    }
+
+    .home-page .contact-panel p {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    @media (max-width: 767.98px) {
+        .home-page .section-surface {
+            padding: 1.25rem;
+        }
     }
 </style>
 @endsection
 
 @section('content')
-<div class="container py-5">
+<div class="container py-5 home-page">
     <!-- Sekcja Hero -->
     <div class="row align-items-center mb-5">
         <div class="col-md-6">
-            <h1 class="display-4 fw-bold mb-3">Nowoczesne apartamenty w Mielnie</h1>
-            <p class="lead mb-4">Zarezerwuj swój pobyt nad morzem w komfortowych warunkach. Sprawdź dostępność i zarezerwuj online!</p>
+            <h1 class="display-4 fw-bold mb-3 section-title">Nowoczesne apartamenty w Mielnie</h1>
+            <p class="lead mb-4 text-muted-custom">Zarezerwuj swój pobyt nad morzem w komfortowych warunkach. Sprawdź dostępność i zarezerwuj online!</p>
             <a href="{{ route('booking.index') }}" class="btn btn-primary btn-lg rounded-4 px-5">Rezerwuj teraz</a>
         </div>
         <div class="col-md-6 text-center">
-            <img src="/public/build/assets/apartament.jpg" alt="Apartament" class="img-fluid rounded-4 shadow-lg" style="max-height: 340px; object-fit: cover;">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80" alt="Apartament" class="hero-img shadow-lg" loading="lazy">
         </div>
     </div>
 
     <!-- Sekcja O apartamencie -->
-    <section class="about-section py-5">
+    <section class="about-section py-5 section-surface">
         <div class="row align-items-center">
             <div class="col-md-6 mb-4 mb-md-0">
-                <img src="/public/build/assets/wnetrze.jpg" alt="Wnętrze apartamentu" class="img-fluid rounded-4 shadow">
+                <img src="https://images.unsplash.com/photo-1560185007-5f0bb1866cab?auto=format&fit=crop&w=1200&q=80" alt="Wnętrze apartamentu" class="about-img shadow" loading="lazy">
             </div>
             <div class="col-md-6">
-                <h2 class="fw-bold mb-3">O naszym apartamencie</h2>
-                <p class="mb-3">Przestronny, nowoczesny apartament w sercu Mielna. Komfortowe łóżka, w pełni wyposażona kuchnia, szybkie Wi-Fi, balkon z widokiem na morze. Idealny na rodzinny wypoczynek lub romantyczny weekend.</p>
+                <h2 class="fw-bold mb-3 section-title">O naszym apartamencie</h2>
+                <p class="mb-3 text-muted-custom">Przestronny, nowoczesny apartament w sercu Mielna. Komfortowe łóżka, w pełni wyposażona kuchnia, szybkie Wi-Fi, balkon z widokiem na morze. Idealny na rodzinny wypoczynek lub romantyczny weekend.</p>
                 <ul class="list-unstyled">
                     <li>✔️ 2 sypialnie, salon, kuchnia</li>
                     <li>✔️ 5 minut do plaży</li>
@@ -52,21 +126,21 @@
     <section class="py-5">
         <div class="row text-center">
             <div class="col-md-4 mb-4">
-                <div class="p-4 rounded-4 shadow-sm bg-white h-100">
+                <div class="p-4 feature-card">
                     <h5 class="fw-bold mb-2">Lokalizacja</h5>
-                    <p>Centrum Mielna, blisko morza i atrakcji.</p>
+                    <p class="text-muted-custom mb-0">Centrum Mielna, blisko morza i atrakcji.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
-                <div class="p-4 rounded-4 shadow-sm bg-white h-100">
+                <div class="p-4 feature-card">
                     <h5 class="fw-bold mb-2">Komfort</h5>
-                    <p>Nowoczesne wnętrza, pełne wyposażenie, klimatyzacja.</p>
+                    <p class="text-muted-custom mb-0">Nowoczesne wnętrza, pełne wyposażenie, klimatyzacja.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
-                <div class="p-4 rounded-4 shadow-sm bg-white h-100">
+                <div class="p-4 feature-card">
                     <h5 class="fw-bold mb-2">Bezpieczeństwo</h5>
-                    <p>Monitoring, bezpłatny parking, bezpieczna okolica.</p>
+                    <p class="text-muted-custom mb-0">Monitoring, bezpłatny parking, bezpieczna okolica.</p>
                 </div>
             </div>
         </div>
@@ -74,45 +148,27 @@
 
     <!-- Sekcja Galeria -->
     <section class="py-5">
-        <h2 class="fw-bold text-center mb-4">Galeria</h2>
+        <h2 class="fw-bold text-center mb-4 section-title">Galeria</h2>
         <div class="row g-3 justify-content-center">
             <div class="col-6 col-md-3">
-                <img src="/public/build/assets/galeria1.jpg" class="img-fluid rounded-4 shadow-sm" alt="Zdjęcie apartamentu 1">
+                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="Zdjęcie apartamentu 1" loading="lazy">
             </div>
             <div class="col-6 col-md-3">
-                <img src="/public/build/assets/galeria2.jpg" class="img-fluid rounded-4 shadow-sm" alt="Zdjęcie apartamentu 2">
+                <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="Zdjęcie apartamentu 2" loading="lazy">
             </div>
             <div class="col-6 col-md-3">
-                <img src="/public/build/assets/galeria3.jpg" class="img-fluid rounded-4 shadow-sm" alt="Zdjęcie apartamentu 3">
+                <img src="https://images.unsplash.com/photo-1464890100898-a385f744067f?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="Zdjęcie apartamentu 3" loading="lazy">
             </div>
             <div class="col-6 col-md-3">
-                <img src="/public/build/assets/galeria4.jpg" class="img-fluid rounded-4 shadow-sm" alt="Zdjęcie apartamentu 4">
+                <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="Zdjęcie apartamentu 4" loading="lazy">
             </div>
         </div>
     </section>
 
-    <!-- Sekcja Opinie -->
-    <section class="py-5 bg-white rounded-4 shadow-sm my-5">
-        <h2 class="fw-bold text-center mb-4">Opinie gości</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-4 mb-3">
-                <blockquote class="blockquote p-4 rounded-4 bg-light shadow-sm">
-                    <p>"Świetna lokalizacja, czysto i bardzo wygodnie. Polecam!"</p>
-                    <footer class="blockquote-footer">Anna, Poznań</footer>
-                </blockquote>
-            </div>
-            <div class="col-md-4 mb-3">
-                <blockquote class="blockquote p-4 rounded-4 bg-light shadow-sm">
-                    <p>"Apartament spełnił wszystkie nasze oczekiwania. Wrócimy!"</p>
-                    <footer class="blockquote-footer">Marek, Warszawa</footer>
-                </blockquote>
-            </div>
-        </div>
-    </section>
 
     <!-- Sekcja FAQ -->
     <section class="py-5">
-        <h2 class="fw-bold text-center mb-4">Najczęstsze pytania</h2>
+        <h2 class="fw-bold text-center mb-4 section-title">Najczęstsze pytania</h2>
         <div class="accordion" id="faqAccordion">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="faq1">
@@ -137,42 +193,6 @@
         </div>
     </section>
 
-    <!-- Sekcja Kontakt -->
-    <section class="contact-section py-5 rounded-4 my-5">
-        <div class="container">
-            <h2 class="fw-bold mb-4 text-center">Kontakt</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <h5>📍 Adres</h5>
-                    <p>Mielno, Polska</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>📞 Telefon</h5>
-                    <p>{{ \App\Models\Setting::get('phone', '+48 123 456 789') }}</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>📧 E-mail</h5>
-                    <p>{{ \App\Models\Setting::get('notification_email', 'admin@Mielno.pl') }}</p>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 </div>
-@endsection
-@section('additional_scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const calendarEl = document.getElementById('calendar');
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'pl',
-            height: 400,
-            events: [
-                { start: '2026-05-15', end: '2026-05-17', display: 'background', backgroundColor: '#FF6A6A' },
-                { start: '2026-05-20', end: '2026-05-22', display: 'background', backgroundColor: '#FF6A6A' }
-            ]
-        });
-        calendar.render();
-    });
-</script>
 @endsection

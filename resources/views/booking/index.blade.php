@@ -1,16 +1,109 @@
 @extends('layouts.app')
 @section('title', 'Rezerwacja')
+
+@section('additional_styles')
+<style>
+    .booking-page {
+        --booking-line: #d8dbe1;
+        --booking-muted: #4b5563;
+        --booking-accent: #2fc96f;
+        --booking-soft: #f7f8f9;
+        font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .booking-page .hero-panel {
+        border: 1px solid var(--booking-line);
+        border-radius: 1.4rem;
+        background: linear-gradient(130deg, #f7f8f9 0%, #edf0f2 100%);
+        padding: 2rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .booking-page .hero-panel h1 {
+        font-size: clamp(2rem, 4vw, 2.9rem);
+        line-height: 1.05;
+        font-weight: 700;
+    }
+
+    .booking-page .hero-panel p {
+        color: var(--booking-muted);
+        max-width: 52ch;
+    }
+
+    .booking-page .info-chip {
+        border: 1px solid #cfd4dd;
+        background: #f1f3f6;
+        border-radius: 999px;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .booking-page .panel-card {
+        border: 1px solid var(--booking-line);
+        background: var(--booking-soft);
+        border-radius: 1.1rem;
+        padding: 1rem;
+    }
+
+    .booking-page .legend-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 4px;
+        display: inline-block;
+        margin-right: 6px;
+    }
+
+    .booking-page #bookingForm {
+        border: 1px solid var(--booking-line);
+        background: #fff;
+    }
+
+    .booking-page #bookingForm .btn-primary {
+        background: var(--booking-accent);
+        color: #03200e;
+        border: 0;
+        font-weight: 700;
+    }
+
+    .booking-page #bookingForm .btn-primary:hover {
+        background: #1bb65a;
+        color: #03150a;
+    }
+
+    @media (max-width: 767.98px) {
+        .booking-page .hero-panel {
+            padding: 1.35rem;
+        }
+    }
+</style>
+@endsection
+
 @section('content')
-<div class="container py-5">
-    <h1 class="mb-4 text-center">Rezerwacja noclegu</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="calendar-container mb-4" id="calendar"></div>
-            <div class="mt-3 text-center">
-                <span class="me-3"><span style="display: inline-block; width: 15px; height: 15px; background: #7C83FD; margin-right: 5px;"></span>Dostępne</span>
-                <span><span style="display: inline-block; width: 15px; height: 15px; background: #FF6A6A; margin-right: 5px;"></span>Zarezerwowane</span>
-            </div>
+<div class="container py-5 booking-page">
+    <section class="hero-panel">
+        <h1 class="mb-3">Rezerwacja apartamentu w Mielnie</h1>
+        <p class="mb-3">Wypełnij formularz, wybierz datę przyjazdu i wyjazdu, a my szybko potwierdzimy dostępność terminu. Wszystko w jednym miejscu, bez zbędnych kroków.</p>
+        <div class="d-flex flex-wrap gap-2">
+            <span class="info-chip">blisko plaży</span>
+            <span class="info-chip">pełne wyposażenie</span>
+            <span class="info-chip">szybkie potwierdzenie</span>
+        </div>
+    </section>
+
+    <div class="row g-4 align-items-start justify-content-center">
+        <div class="col-12 col-lg-5">
             @include('booking._form')
+        </div>
+        <div class="col-12 col-lg-7">
+            <div class="panel-card mb-3">
+                <div class="calendar-container mb-0" id="calendar"></div>
+            </div>
+            <div class="panel-card text-center">
+                <span class="me-3"><span class="legend-dot" style="background: #7C83FD;"></span>Dostępne</span>
+                <span><span class="legend-dot" style="background: #FF6A6A;"></span>Zarezerwowane</span>
+            </div>
         </div>
     </div>
 </div>

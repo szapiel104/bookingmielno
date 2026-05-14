@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Mielno - Rezerwacje Apartamentów')</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" rel="stylesheet">
@@ -22,29 +25,119 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #F9F9F9;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #f3f4f6;
         }
 
         .navbar {
-            background: #fff;
-            border-bottom: 1px solid #eaeaea;
-            box-shadow: 0 2px 10px rgba(124,131,253,0.07);
+            background: #f7f7f8;
+            border-bottom: 1px solid #e2e2e2;
+            box-shadow: none;
+            min-height: 92px;
         }
 
         .navbar-brand {
+            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: 0.04em;
+            color: #111218 !important;
+            text-transform: uppercase;
+        }
+
+        .navbar-brand .brand-dot {
+            display: inline-block;
+            margin: 0 10px;
+            color: #111218;
+        }
+
+        .main-nav {
+            gap: 8px;
+        }
+
+        .main-nav .nav-link {
+            color: #151821 !important;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 10px 16px !important;
+            border-radius: 12px;
+            transition: background-color 0.2s ease;
+        }
+
+        .main-nav .nav-link:hover,
+        .main-nav .nav-link:focus {
+            color: #151821 !important;
+            background: #ececef;
+        }
+
+        .nav-cta {
+            border: 1.5px solid #151821;
+            color: #151821;
+            background: transparent;
             font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-            color: var(--bs-primary) !important;
+            border-radius: 999px;
+            padding: 12px 24px;
+            line-height: 1;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
-        .navbar-nav .nav-link {
-            color: #22223B !important;
-            font-weight: 500;
-            transition: color 0.2s;
+
+        .nav-cta:hover {
+            color: #151821;
+            background: #ececef;
         }
-        .navbar-nav .nav-link.active, .navbar-nav .nav-link:focus, .navbar-nav .nav-link:hover {
-            color: var(--bs-primary) !important;
+
+        .lang-switch {
+            color: #151821;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 8px 10px;
+            border-radius: 10px;
+        }
+
+        .lang-switch:hover {
+            color: #151821;
+            background: #ececef;
+        }
+
+        .eu-badge {
+            width: 54px;
+            height: 36px;
+            border-radius: 4px;
+            background: #1e53b3;
+            border: 1px solid #d8d8d8;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd948;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        .eu-badge::before {
+            content: 'UE';
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar {
+                min-height: auto;
+            }
+
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .main-nav {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .nav-actions {
+                gap: 10px;
+                padding-bottom: 10px;
+            }
         }
 
         .hero-section {
@@ -204,42 +297,27 @@
     @yield('additional_styles')
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">📍 Mielno</a>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand" href="/">Art Lake 28</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav main-nav mx-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Strona główna</a>
+                        <a class="nav-link" href="/o-nas">O nas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/booking">Rezerwacja</a>
+                        <a class="nav-link" href="/rezerwacja">Rezerwacja</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact">Kontakt</a>
+                        <a class="nav-link" href="/kontakt">Kontakt</a>
                     </li>
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Panel admina</a>
-                        </li>
-                    @endguest
-                    @auth
-                        @if(auth()->user()->is_admin)
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.dashboard') }}">Panel Admina</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Wyloguj</a>
-                            </li>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        @endif
-                    @endauth
                 </ul>
+                <div class="d-flex align-items-center nav-actions gap-3 ms-lg-2">
+                    <a href="/rezerwacja" class="nav-cta">Rezerwuj</a>
+                </div>
             </div>
         </div>
     </nav>
