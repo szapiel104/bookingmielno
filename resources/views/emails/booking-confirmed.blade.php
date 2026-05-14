@@ -56,15 +56,15 @@
 
             <p style="margin-top: 20px; background: #e8f5e9; padding: 15px; border-radius: 5px;">
                 <strong>Dziękujemy za zaufanie!</strong><br>
-                Jeśli masz jakiekolwiek pytania, skontaktuj się z nami pod numerem {{ \App\Models\Setting::get('phone', '+48 123 456 789') }} lub wyślij e-mail na adres: {{ \App\Models\Setting::get('notification_email', 'admin@bookingmielno.pl') }}
+                Jeśli masz jakiekolwiek pytania, skontaktuj się z nami pod numerem {{ \App\Models\Setting::get('phone', '+48 123 456 789') }} lub wyślij e-mail na adres: {{ \App\Models\Setting::get('notification_email', 'admin@Mielno.pl') }}
             </p>
 
             <p style="text-align: center; margin-top: 30px; color: #666;">
-                Cieszę się na Twoją wizytę w BookingMielno! 🏖️
+                Cieszę się na Twoją wizytę w Mielno! 🏖️
             </p>
         </div>
         <div class="footer">
-            <p>© 2024 BookingMielno - System Rezerwacji</p>
+            <p>© 2024 Mielno - System Rezerwacji</p>
         </div>
     </div>
 </body>

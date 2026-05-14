@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h2>📍 Nowa Rezerwacja - BookingMielno</h2>
+            <h2>📍 Nowa Rezerwacja - Mielno</h2>
         </div>
         <div class="content">
             <p>Otrzymałeś nową rezerwację!</p>
@@ -55,7 +55,7 @@
             </p>
         </div>
         <div class="footer">
-            <p>© 2024 BookingMielno - System Rezerwacji</p>
+            <p>© 2024 Mielno - System Rezerwacji</p>
         </div>
     </div>
 </body>

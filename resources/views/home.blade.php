@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Rezerwuj Apartament - BookingMielno')
+@section('title', 'Rezerwuj Apartament - Mielno')
 
 @section('additional_styles')
 <style>
@@ -165,7 +165,7 @@
             </div>
             <div class="col-md-4">
                 <h5>📧 E-mail</h5>
-                <p>{{ \App\Models\Setting::get('notification_email', 'admin@bookingmielno.pl') }}</p>
+                <p>{{ \App\Models\Setting::get('notification_email', 'admin@Mielno.pl') }}</p>
             </div>
         </div>
     </div>

@@ -4,66 +4,38 @@
 @section('page_title', 'Dashboard')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>{{ $total_bookings }}</h3>
-                <p>Razem rezerwacji</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-calendar-alt"></i>
-            </div>
-            <a href="{{ route('admin.bookings') }}" class="small-box-footer">
-                Przejdź <i class="fas fa-arrow-circle-right"></i>
-            </a>
+<div class="row mb-2 mb-md-3">
+    <div class="col-lg-3 col-6 mb-3 mb-lg-0">
+        <div class="metric-card">
+            <p class="metric-label">Razem rezerwacji</p>
+            <p class="metric-value">{{ $total_bookings }}</p>
+            <a href="{{ route('admin.bookings') }}" class="metric-link">Przejdź <i class="fas fa-arrow-right ml-1"></i></a>
         </div>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3>{{ $pending_bookings }}</h3>
-                <p>Oczekujące</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-hourglass-half"></i>
-            </div>
-            <a href="{{ route('admin.bookings', ['status' => 'Pending']) }}" class="small-box-footer">
-                Filtruj <i class="fas fa-arrow-circle-right"></i>
-            </a>
+    <div class="col-lg-3 col-6 mb-3 mb-lg-0">
+        <div class="metric-card is-pending">
+            <p class="metric-label">Oczekujące</p>
+            <p class="metric-value">{{ $pending_bookings }}</p>
+            <a href="{{ route('admin.bookings', ['status' => 'Pending']) }}" class="metric-link">Filtruj <i class="fas fa-arrow-right ml-1"></i></a>
         </div>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>{{ $confirmed_bookings }}</h3>
-                <p>Potwierdzone</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <a href="{{ route('admin.bookings', ['status' => 'Confirmed']) }}" class="small-box-footer">
-                Filtruj <i class="fas fa-arrow-circle-right"></i>
-            </a>
+    <div class="col-lg-3 col-6 mb-3 mb-lg-0">
+        <div class="metric-card is-confirmed">
+            <p class="metric-label">Potwierdzone</p>
+            <p class="metric-value">{{ $confirmed_bookings }}</p>
+            <a href="{{ route('admin.bookings', ['status' => 'Confirmed']) }}" class="metric-link">Filtruj <i class="fas fa-arrow-right ml-1"></i></a>
         </div>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>{{ $cancelled_bookings }}</h3>
-                <p>Anulowane</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-times-circle"></i>
-            </div>
-            <a href="{{ route('admin.bookings', ['status' => 'Cancelled']) }}" class="small-box-footer">
-                Filtruj <i class="fas fa-arrow-circle-right"></i>
-            </a>
+    <div class="col-lg-3 col-6 mb-3 mb-lg-0">
+        <div class="metric-card is-cancelled">
+            <p class="metric-label">Anulowane</p>
+            <p class="metric-value">{{ $cancelled_bookings }}</p>
+            <a href="{{ route('admin.bookings', ['status' => 'Cancelled']) }}" class="metric-link">Filtruj <i class="fas fa-arrow-right ml-1"></i></a>
         </div>
     </div>
 </div>
 
-<div class="row">
+<div class="row mt-1 mt-md-2">
     <div class="col-lg-8">
         <div class="card admin-panel">
             <div class="card-header">

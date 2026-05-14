@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'W budowie - BookingMielno')
+@section('title', 'W budowie - Mielno')
 
 @section('content')
 <section class="hero-section" style="min-height: 90vh; display: flex; align-items: center; justify-content: center;">
@@ -35,8 +35,8 @@
 
                 <p style="margin-top: 60px; color: rgba(255,255,255,0.6); font-size: 0.95rem;">
                     W razie pytań prosimy o kontakt: 
-                    <a href="mailto:info@bookingmielno.pl" style="color: rgba(255,255,255,0.9); text-decoration: underline;">
-                        info@bookingmielno.pl
+                    <a href="mailto:info@Mielno.pl" style="color: rgba(255,255,255,0.9); text-decoration: underline;">
+                        info@Mielno.pl
                     </a>
                 </p>
             </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Panel Administratora - BookingMielno')</title>
+    <title>@yield('title', 'Panel Administratora - Mielno')</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,58 +11,90 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <style>
         :root {
-            --brand-1: #16324f;
-            --brand-2: #235a75;
-            --brand-3: #f2a541;
-            --panel-bg: #eef3f7;
-            --panel-border: #d8e0e8;
-            --text-strong: #0f2235;
+            --accent: #2f6fed;
+            --accent-hover: #255ddb;
+            --bg: #f4f7fb;
+            --bg-elevated: #ffffff;
+            --bg-soft: #eef3f8;
+            --border: #d8e0ea;
+            --text: #0f172a;
+            --text-muted: #5f6c80;
+            --sidebar-bg: #f9fbff;
+            --topbar-bg: #ffffff;
+            --shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+            --accent-rgb: 47, 111, 237;
+            --danger: #d7444e;
+            --success: #2a9d62;
+            --warning: #d08a2e;
         }
 
         body {
             font-family: 'Sora', sans-serif;
-            background: radial-gradient(circle at 10% 10%, #f7fbff 0%, #edf4fb 35%, #e9eff6 100%);
-            color: var(--text-strong);
+            background: var(--bg);
+            color: var(--text);
         }
 
         .main-header.navbar {
-            border-bottom: 0;
-            background: linear-gradient(120deg, var(--brand-1) 0%, var(--brand-2) 62%, #2e728e 100%);
-            box-shadow: 0 8px 24px rgba(18, 42, 69, 0.25);
+            border-bottom: 1px solid var(--border);
+            background: var(--topbar-bg);
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
         }
 
         .main-header .nav-link,
         .main-header .navbar-brand {
-            color: #fff !important;
+            color: var(--text) !important;
+        }
+
+        .main-header .text-white-50,
+        .main-header .text-white {
+            color: var(--text-muted) !important;
         }
 
         .main-sidebar {
-            background: linear-gradient(180deg, #0f2235 0%, #122a43 45%, #173753 100%);
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
         }
 
         .brand-link {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-            color: #fff !important;
+            background: var(--sidebar-bg) !important;
+            border-bottom: 1px solid var(--border);
+            color: var(--text) !important;
             font-weight: 700;
+            padding: 0.95rem 1rem;
+        }
+
+        .brand-link .brand-text {
+            color: var(--text) !important;
+            opacity: 1 !important;
         }
 
         .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link {
-            color: #d9e7f4;
-            border-radius: 0.6rem;
-            margin: 0.2rem 0.5rem;
-            transition: 0.2s ease-in-out;
+            color: var(--text-muted);
+            border-radius: 0;
+            margin: 0;
+            padding: 0.68rem 1rem;
+            transition: background-color 0.15s ease, color 0.15s ease;
+            font-weight: 500;
+            border-left: 3px solid transparent;
         }
 
         .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.12);
-            color: #fff;
+            background-color: var(--bg-soft);
+            color: var(--text);
+        }
+
+        .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link .nav-icon {
+            font-size: 1.05rem;
+            margin-right: 0.35rem;
+            color: currentColor;
         }
 
         .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active {
-            background: linear-gradient(120deg, rgba(242, 165, 65, 0.95), rgba(255, 195, 97, 0.95));
-            color: #1b2b38;
-            font-weight: 700;
-            box-shadow: 0 8px 20px rgba(242, 165, 65, 0.32);
+            background: var(--bg-soft);
+            color: var(--text);
+            font-weight: 600;
+            box-shadow: none;
+            border-left-color: var(--accent);
         }
 
         .content-wrapper {
@@ -75,44 +107,171 @@
         }
 
         .admin-panel {
-            border: 1px solid var(--panel-border);
+            border: 1px solid var(--border);
             border-radius: 16px;
-            box-shadow: 0 12px 28px rgba(17, 40, 66, 0.09);
-            background: #fff;
+            box-shadow: var(--shadow);
+            background: var(--bg-elevated);
         }
 
         .card {
-            border: 1px solid var(--panel-border);
+            border: 1px solid var(--border);
             border-radius: 14px;
-            box-shadow: 0 8px 24px rgba(17, 40, 66, 0.08);
+            box-shadow: var(--shadow);
+            background: var(--bg-elevated);
+            color: var(--text);
         }
 
         .card-header {
-            background: linear-gradient(120deg, var(--brand-1) 0%, var(--brand-2) 100%);
-            color: #fff;
-            border-bottom: 0;
+            background: var(--bg-soft);
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
             border-radius: 14px 14px 0 0 !important;
         }
 
-        .small-box {
+        .metric-card {
             border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 10px 26px rgba(18, 42, 69, 0.12);
+            border: 1px solid var(--border);
+            background: var(--bg-elevated);
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            height: 100%;
+            margin-bottom: 1rem;
         }
 
-        .small-box > .inner h3 {
-            font-size: 2.1rem;
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            line-height: 1;
+            margin: 0.35rem 0;
             font-weight: 700;
+            color: var(--text);
+        }
+
+        .metric-link {
+            display: inline-block;
+            margin-top: 0.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .metric-card.is-pending .metric-value {
+            color: var(--warning);
+        }
+
+        .metric-card.is-confirmed .metric-value {
+            color: var(--success);
+        }
+
+        .metric-card.is-cancelled .metric-value {
+            color: var(--danger);
         }
 
         .btn-primary {
-            border-color: transparent;
-            background: linear-gradient(120deg, var(--brand-1) 0%, var(--brand-2) 100%);
+            border-color: var(--accent);
+            background: var(--accent);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(120deg, #214e73 0%, #2f7392 100%);
-            border-color: transparent;
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .btn-outline-secondary,
+        .btn-secondary {
+            border-color: var(--border);
+            color: var(--text);
+            background: var(--bg-elevated);
+        }
+
+        .btn-outline-secondary:hover,
+        .btn-secondary:hover {
+            background: var(--bg-soft);
+            border-color: var(--border);
+            color: var(--text);
+        }
+
+        .table {
+            color: var(--text);
+        }
+
+        .table thead th {
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .table td,
+        .table th {
+            border-top: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .form-control,
+        .custom-select,
+        textarea.form-control {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .form-control:focus,
+        .custom-select:focus,
+        textarea.form-control:focus {
+            border-color: rgba(var(--accent-rgb), 0.5);
+            box-shadow: 0 0 0 0.2rem rgba(var(--accent-rgb), 0.14);
+            background: var(--bg-elevated);
+            color: var(--text);
+        }
+
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        .alert {
+            border: 1px solid var(--border);
+            background: var(--bg-elevated);
+            color: var(--text);
+        }
+
+        .main-footer {
+            border-top: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+        }
+
+        .badge.bg-success,
+        .badge.badge-success {
+            background-color: rgba(42, 157, 98, 0.18) !important;
+            color: var(--success) !important;
+            border: 1px solid rgba(42, 157, 98, 0.34);
+        }
+
+        .badge.bg-warning,
+        .badge.badge-warning {
+            background-color: rgba(208, 138, 46, 0.18) !important;
+            color: var(--warning) !important;
+            border: 1px solid rgba(208, 138, 46, 0.34);
+        }
+
+        .badge.bg-danger,
+        .badge.badge-danger {
+            background-color: rgba(215, 68, 78, 0.18) !important;
+            color: var(--danger) !important;
+            border: 1px solid rgba(215, 68, 78, 0.34);
+        }
+
+        .badge.bg-secondary,
+        .badge.badge-secondary {
+            background-color: rgba(127, 139, 160, 0.18) !important;
+            color: var(--text-muted) !important;
+            border: 1px solid rgba(127, 139, 160, 0.34);
         }
 
         .page-enter {
@@ -161,7 +320,7 @@
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="{{ route('admin.dashboard') }}" class="brand-link">
-            <span class="brand-text">BookingMielno Admin</span>
+            <span class="brand-text">Mielno Admin</span>
         </a>
 
         <div class="sidebar">
@@ -235,7 +394,7 @@
     </div>
 
     <footer class="main-footer text-sm">
-        <strong>BookingMielno</strong> <span class="text-muted">| panel administracyjny</span>
+        <strong>Mielno</strong> <span class="text-muted">| panel administracyjny</span>
         <div class="float-right d-none d-sm-inline-block">
             Laravel {{ app()->version() }}
         </div>

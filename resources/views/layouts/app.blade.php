@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'BookingMielno - Rezerwacje Apartamentów')</title>
+    <title>@yield('title', 'Mielno - Rezerwacje Apartamentów')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" rel="stylesheet">
@@ -182,7 +182,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">📍 BookingMielno</a>
+            <a class="navbar-brand" href="/">📍 Mielno</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -226,7 +226,7 @@
 
     <footer>
         <div class="container">
-            <p>{{ \App\Models\Setting::get('footer_text', '© 2024 BookingMielno. Wszystkie prawa zastrzeżone.') }}</p>
+            <p>{{ \App\Models\Setting::get('footer_text', '© 2024 Mielno. Wszystkie prawa zastrzeżone.') }}</p>
         </div>
     </footer>
 
