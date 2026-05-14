@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Mielno - Rezerwacje Apartamentów')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
@@ -10,37 +11,48 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet">
     <style>
         :root {
-            --bs-primary: #1a1a2e;
-            --bs-secondary: #0f3460;
-            --bs-success: #16a34a;
-            --bs-danger: #dc2626;
-            --bs-warning: #ea580c;
-            --bs-info: #0891b2;
-            --bs-light: #f8f9fa;
-            --bs-dark: #1a1a2e;
+            --bs-primary: #7C83FD;
+            --bs-secondary: #96BAFF;
+            --bs-success: #A8E6CF;
+            --bs-danger: #FF6A6A;
+            --bs-warning: #FFD6E0;
+            --bs-info: #B8FFF9;
+            --bs-light: #F9F9F9;
+            --bs-dark: #22223B;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #F9F9F9;
         }
 
         .navbar {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #fff;
+            border-bottom: 1px solid #eaeaea;
+            box-shadow: 0 2px 10px rgba(124,131,253,0.07);
         }
 
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
             letter-spacing: 1px;
+            color: var(--bs-primary) !important;
+        }
+        .navbar-nav .nav-link {
+            color: #22223B !important;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .navbar-nav .nav-link.active, .navbar-nav .nav-link:focus, .navbar-nav .nav-link:hover {
+            color: var(--bs-primary) !important;
         }
 
         .hero-section {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-            color: white;
+            background: linear-gradient(135deg, #7C83FD 0%, #96BAFF 100%);
+            color: #22223B;
             padding: 100px 0;
             text-align: center;
+            border-radius: 0 0 2rem 2rem;
         }
 
         .hero-section h1 {
@@ -57,10 +69,10 @@
         }
 
         .booking-form {
-            background: white;
+            background: #fff;
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(124,131,253,0.10);
             margin-top: -80px;
             position: relative;
             z-index: 10;
@@ -69,7 +81,7 @@
         .form-control, .form-select {
             border: 1px solid #e0e0e0;
             padding: 12px 15px;
-            border-radius: 8px;
+            border-radius: 1.2rem;
             font-size: 1rem;
         }
 
@@ -79,17 +91,19 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            background: linear-gradient(135deg, #7C83FD 0%, #96BAFF 100%);
             border: none;
             padding: 12px 40px;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 1.5rem;
+            color: #fff;
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(15, 52, 96, 0.3);
+            box-shadow: 0 10px 20px rgba(124,131,253,0.15);
+            background: linear-gradient(135deg, #96BAFF 0%, #7C83FD 100%);
         }
 
         .price-display {
@@ -144,14 +158,24 @@
         }
 
         .calendar-container {
-            background: white;
+            background: #fff;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 2rem;
+            box-shadow: 0 4px 16px rgba(124,131,253,0.10);
             margin: 20px 0;
         }
 
-        .flatpickr-calendar {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        .fc-daygrid-day {
+            font-size: 0.9rem;
+        }
+
+        .fc-daygrid-event {
+            background-color: #dc2626 !important;
+            color: white !important;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 4px;
+            font-size: 0.8rem;
         }
 
         .fade-in {
@@ -189,13 +213,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/#about">O nas</a>
+                        <a class="nav-link" href="/">Strona główna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#booking">Rezerwacja</a>
+                        <a class="nav-link" href="/booking">Rezerwacja</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#contact">Kontakt</a>
+                        <a class="nav-link" href="/contact">Kontakt</a>
                     </li>
                     @guest
                         <li class="nav-item">

@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Mail;
 class BookingController extends Controller
 {
     /**
+     * Show the booking page
+     */
+    public function index()
+    {
+        return view('booking.index');
+    }
+
+    /**
      * Get available dates (dates without confirmed bookings)
      */
     public function getAvailability()

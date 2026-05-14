@@ -8,6 +8,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 // API routes for booking system
 Route::post('/api/bookings', [BookingController::class, 'store']);

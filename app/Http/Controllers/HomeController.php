@@ -36,4 +36,12 @@ class HomeController extends Controller
             'min_nights'
         ));
     }
+
+    /**
+     * Show the contact page
+     */
+    public function contact()
+    {
+        return view('contact');
+    }
 }
